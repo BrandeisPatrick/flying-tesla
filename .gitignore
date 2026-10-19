@@ -1,0 +1,18 @@
+# dependencies and build output
+node_modules/
+dist/
+.vite/
+*.log
+
+# OS / editor
+.DS_Store
+
+# bake caches (tools/bake-map.mjs, tools/bake-terrain.mjs re-download what they need)
+tools/.terrain-cache/
+tools/.osm-cache/
+
+# Poly Haven texture sets (CC0, 85 MB): re-fetch with `node tools/fetch-textures.mjs`, then
+# `npm run textures:compress`; the manifest and credits stay in the repo, the game falls back to
+# procedural textures when the files are missing
+public/textures/**/*.jpg
+public/textures/**/*.ktx2

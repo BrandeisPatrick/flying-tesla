@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HUD / Camera / Audio test bench</title>
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #000; font-family: -apple-system, system-ui, sans-serif; }
+    #app { position: fixed; inset: 0; }
+    canvas { display: block; }
+    #devbar { position: fixed; left: 50%; top: 12px; transform: translateX(-50%); z-index: 50; color: #cfd6e0;
+      font-size: 12px; background: rgba(0,0,0,.55); padding: 6px 12px; border-radius: 8px; letter-spacing: .03em; white-space: nowrap; }
+    #devbar b { color: #fff; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="devbar">DEV · <b>click</b> = start audio · <b>C</b> camera · <b>B</b> (hold) look back · <b>H</b> help · <b>F</b> flash · <b>M</b> mute · <b>X</b> damage hit · <b>Space</b> pause · <b>R</b> snap · mode: <span id="cammode">chase</span></div>
+  <script type="module" src="./hud.js"></script>
+</body>
+</html>

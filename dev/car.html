@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Car test bench</title>
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #0b0e13; font-family: -apple-system, system-ui, sans-serif; }
+    #app { position: fixed; inset: 0; }
+    canvas { display: block; }
+    #hud { position: fixed; left: 12px; top: 12px; z-index: 5; color: #d8dee8; font: 12px/1.45 ui-monospace, Menlo, monospace;
+      background: rgba(0,0,0,.55); padding: 8px 12px; border-radius: 8px; white-space: pre; pointer-events: none; }
+    #keys { position: fixed; right: 12px; bottom: 12px; z-index: 5; color: #aab3c0; font-size: 12px; line-height: 1.5;
+      background: rgba(0,0,0,.5); padding: 8px 12px; border-radius: 8px; max-width: 360px; }
+    #keys b { color: #fff; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="hud"></div>
+  <div id="keys">
+    <b>W/S ↑↓</b> throttle / brake (brake at stop = reverse) · <b>A/D ←→</b> steer / roll ·
+    <b>Space</b> thrust · <b>Shift</b> boost · <b>X</b> handbrake · <b>Q/E</b> yaw · <b>I/K</b> pitch ·
+    <b>R</b> reset · <b>B</b> look back · <b>N</b> night · <b>V</b> hover-assist · <b>C</b> camera mode · <b>O</b> orbit · <b>1-0</b> preset views (Esc exits) · <b>P</b> pause · gamepad supported
+  </div>
+  <script type="module" src="./car.js"></script>
+</body>
+</html>

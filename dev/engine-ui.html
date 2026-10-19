@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Engine UI / Input / Camera / Audio demo</title>
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #06080c; color: #dfe5ee;
+      font: 13px/1.4 -apple-system, system-ui, "Segoe UI", Roboto, sans-serif; }
+    #view { position: fixed; left: 340px; right: 0; top: 0; bottom: 0; }
+    #view canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+    #side { position: fixed; left: 0; top: 0; bottom: 0; width: 340px; overflow-y: auto; box-sizing: border-box;
+      padding: 14px 14px 40px; background: #0b0f15; border-right: 1px solid #1c2430; }
+    #side h1 { font-size: 14px; letter-spacing: .18em; margin: 0 0 2px; font-weight: 600; }
+    #side h1 b { color: var(--ui-accent, #e82127); }
+    #side .sub { color: #8793a3; font-size: 11px; margin-bottom: 10px; }
+    #side section { border-top: 1px solid #1c2430; padding: 10px 0 8px; }
+    #side h2 { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: #8793a3; margin: 0 0 8px; font-weight: 600; }
+    #side button { font: inherit; font-size: 12px; color: #e6ebf2; background: #18202b; border: 1px solid #2a3544; border-radius: 6px;
+      padding: 5px 9px; margin: 0 4px 6px 0; cursor: pointer; }
+    #side button:hover { border-color: #3d4b5e; }
+    #side button.on { background: rgba(232,33,39,.22); border-color: var(--ui-accent, #e82127); }
+    #side label { display: flex; align-items: center; gap: 8px; margin: 4px 0; font-size: 12px; color: #b7c1ce; }
+    #side label input[type=range] { flex: 1; }
+    #side .hint { color: #7d8898; font-size: 11px; margin-top: 2px; }
+    table.act { width: 100%; border-collapse: collapse; font-size: 11px; font-variant-numeric: tabular-nums; }
+    table.act td { padding: 2px 0; }
+    table.act td:first-child { color: #b7c1ce; width: 90px; }
+    table.act td:last-child { width: 46px; text-align: right; color: #8793a3; }
+    .meter { position: relative; height: 6px; background: #18202b; border-radius: 3px; overflow: hidden; }
+    .meter i { position: absolute; top: 0; bottom: 0; left: 50%; width: 0; background: #7fd3ff; }
+    .meter.down i { background: var(--ui-accent, #e82127); }
+    .meter.edge { box-shadow: 0 0 0 1px #fff; }
+    #raw { font: 11px/1.5 ui-monospace, Menlo, monospace; color: #8fa0b5; white-space: pre-wrap; word-break: break-all; }
+    .ui-root.demo-layer { left: 340px; }
+    @media (max-width: 760px) {
+      #view, .ui-root.demo-layer { left: 0; bottom: 46vh; }
+      #side { top: auto; height: 46vh; width: 100%; border-right: 0; border-top: 1px solid #1c2430; }
+    }
+  </style>
+</head>
+<body>
+  <div id="view"></div>
+  <aside id="side">
+    <h1>ENGINE <b>·</b> UI KIT</h1>
+    <div class="sub">engine/src/{ui,input,camera,audio} — drive the cube: WASD / arrows · Space lift · Shift boost · C camera · G honk · gamepad · touch</div>
+    <section><h2>Camera rigs</h2>
+      <div id="rigs"></div>
+      <div class="hint" id="righint"></div>
+    </section>
+    <section><h2>Input map</h2>
+      <div id="inputbtns"></div>
+      <table class="act" id="acts"></table>
+      <div id="raw"></div>
+    </section>
+    <section><h2>Audio</h2>
+      <div id="audiobtns"></div>
+      <label>Volume <input id="vol" type="range" min="0" max="1" step="0.01" value="0.7" /></label>
+      <label>Near water <input id="water" type="range" min="0" max="1" step="0.01" value="0" /></label>
+      <label>Darkness <input id="dark" type="range" min="0" max="1" step="0.01" value="0" /></label>
+      <div class="hint">Voices route to the ui / effects / engine / ambience buses of one AudioBus.</div>
+    </section>
+    <section><h2>Widgets</h2>
+      <div id="uibtns"></div>
+      <label>Accent <input id="accent" type="color" value="#e82127" /></label>
+      <div class="hint">CSS-driven parts follow the accent live; canvas/SVG widgets read it at construction.</div>
+    </section>
+  </aside>
+  <script type="module" src="./engine-ui.js"></script>
+</body>
+</html>

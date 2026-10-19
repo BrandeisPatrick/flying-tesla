@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Engine render layer</title>
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #000; font-family: -apple-system, system-ui, sans-serif; }
+    #app { position: fixed; inset: 0; }
+    canvas { display: block; }
+    #hud { position: fixed; left: 10px; top: 10px; color: #fff; font: 12px/1.45 ui-monospace, Menlo, monospace; background: rgba(0,0,0,.55); padding: 8px 10px; border-radius: 6px; white-space: pre; pointer-events: none; }
+    #help { position: fixed; right: 10px; top: 10px; color: #ddd; font: 12px/1.5 ui-monospace, Menlo, monospace; background: rgba(0,0,0,.45); padding: 8px 10px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="hud">loading…</div>
+  <div id="help">orbit: drag · pan: right-drag · zoom: wheel<br>1-8: time presets (dawn..night) · P: post-fx on/off<br>F: fly out / back · F3: profiler<br>?t=hours|preset &amp;nofx=1 &amp;cones=2000 &amp;profile=10</div>
+  <script type="module" src="./engine-render.js"></script>
+</body>
+</html>

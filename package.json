@@ -1,0 +1,34 @@
+{
+  "name": "flying-car",
+  "version": "1.0.0",
+  "description": "Browser flying-car driving game (Three.js)",
+  "main": "src/main.js",
+  "scripts": {
+    "dev": "vite --port 5180",
+    "prebuild": "node tools/compress-textures.mjs --basis-only",
+    "build": "vite build",
+    "preview": "vite preview --port 5181",
+    "bake:map": "node tools/bake-map.mjs",
+    "bake:terrain": "node tools/bake-terrain.mjs",
+    "textures:fetch": "node tools/fetch-textures.mjs",
+    "textures:compress": "node tools/compress-textures.mjs",
+    "textures:basis": "node tools/compress-textures.mjs --basis-only",
+    "test": "node tools/car-sim.mjs && node dev/traffic-sim.mjs 30 250"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "jpeg-js": "0.4.4",
+    "ktx-parse": "1.1.0",
+    "ktx2-encoder": "0.6.0",
+    "vite": "^7.3.7"
+  },
+  "workspaces": [
+    "engine"
+  ]
+}

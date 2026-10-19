@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Traffic dev viewer</title>
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #000; font-family: -apple-system, system-ui, sans-serif; }
+    canvas { display: block; }
+    #hud { position: fixed; left: 10px; top: 10px; color: #fff; font: 12px/1.45 ui-monospace, Menlo, monospace; background: rgba(0,0,0,.55); padding: 8px 10px; border-radius: 6px; white-space: pre; pointer-events: none; }
+    #help { position: fixed; right: 10px; top: 10px; color: #ddd; font: 12px/1.5 ui-monospace, Menlo, monospace; background: rgba(0,0,0,.45); padding: 8px 10px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <div id="hud">loading…</div>
+  <div id="help">orbit: drag · pan: right-drag · zoom: wheel<br>1-8: time presets · F: follow next vehicle · Esc: stop following<br>L: lane graph overlay near target · P: dummy player at target<br>H: baked lane heights vs live ground (console)<br>?n=vehicles &amp;t=hours &amp;cam=x,y,z,tx,ty,tz &amp;noworker=1 &amp;nostream=1</div>
+  <script type="module" src="./traffic.js"></script>
+</body>
+</html>
