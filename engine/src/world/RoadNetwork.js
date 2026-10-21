@@ -326,6 +326,40 @@ function subdivide(pts, maxLen, flags) {
   }
   return { pts: out, flags: fl };
 }
+/**
+ * Deck subdivision: `coarse` m spacing, `fine` m inside the ramp-foot zones (zone[0] m from the start, zone[1] m
+ * from the end; see RoadNetwork.footZone), with a vertex exactly where each zone ends. Keeps the input point
+ * objects for the original vertices (R.dints matches them by identity). Returns { pts, flags, s } (s: arc length).
+ */
+function subdivideDeck(pts, flags, pp, zone, fine = 4, coarse = 18) {
+  const L = pp.L, za = Math.min(zone[0] || 0, L), zb = Math.min(zone[1] || 0, L);
+  const cuts = [];
+  if (za > 0 && za < L) cuts.push(za);
+  if (zb > 0 && L - zb > 0 && Math.abs(L - zb - za) > 0.5) cuts.push(L - zb);
+  const inZone = (s) => (za > 0 && s < za + 1e-6) || (zb > 0 && s > L - zb - 1e-6);
+  const out = [], fl = [], ss = [];
+  for (let i = 0; i < pts.length; i++) {
+    out.push(pts[i]); fl.push(flags ? flags[i] : 0); ss.push(pp.s[i]);
+    if (i + 1 >= pts.length) continue;
+    const s0 = pp.s[i], s1 = pp.s[i + 1], a = pts[i], b = pts[i + 1];
+    const at = (s) => { const t = (s - s0) / Math.max(1e-9, s1 - s0); out.push([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]); fl.push(0); ss.push(s); };
+    const bps = [s0, ...cuts.filter((c) => c > s0 + 0.5 && c < s1 - 0.5).sort((p, q) => p - q), s1];
+    for (let k = 0; k + 1 < bps.length; k++) {
+      const p = bps[k], q = bps[k + 1], maxLen = inZone((p + q) / 2) ? fine : coarse;
+      const n = Math.floor((q - p) / maxLen);
+      for (let j = 1; j <= n; j++) at(p + ((q - p) * j) / (n + 1));
+      if (k + 2 < bps.length) at(q);
+    }
+  }
+  return { pts: out, flags: fl, s: ss };
+}
+/** Part of a polyline between arc lengths s0 and s1 (interpolated end points, the original vertices between). */
+function subPolyline(pts, pp, s0, s1) {
+  const out = [samplePolyline(pts, pp, s0).slice(0, 2)];
+  for (let i = 1; i < pts.length - 1; i++) if (pp.s[i] > s0 + 0.05 && pp.s[i] < s1 - 0.05) out.push(pts[i]);
+  out.push(samplePolyline(pts, pp, s1).slice(0, 2));
+  return out;
+}
 /** Copy of pts with extra vertices at arc positions ss (only strictly inside segments). */
 function insertVertices(pts, pp, ss) {
   const add = ss.filter((s) => s > 0.05 && s < pp.L - 0.05).sort((a, b) => a - b);
@@ -342,6 +376,10 @@ function insertVertices(pts, pp, ss) {
   return out;
 }
 const key = (p) => `${Math.round(p[0] * 10)},${Math.round(p[1] * 10)}`;
+// ramp-foot zones (RoadNetwork.footZone): sampling step, give-up gap to the next street / service road, reach from a
+// grounded end (m), and the lift of a deck pinned to a street it runs over (its ribbon draws on top of the street's
+// instead of z-fighting)
+const FOOT_STEP = 0.5, FOOT_GAP = 15, FOOT_GAP_SERVICE = 30, FOOT_MAX = 60, ZONE_LIFT = 0.02;
 
 // ------------------------------------------------------------------ network
 /**
@@ -458,11 +496,13 @@ export class RoadNetwork {
       }
     }
     this.findGeometricJunctions(roads);
+    this.footZones(roads);
 
-    // ---- raster of ground-level carriageways (needed before sidewalks / piers)
+    // ---- raster of ground-level carriageways (needed before sidewalks / piers); a ramp-foot zone is paving too
     if (this.raster) {
       for (const R of roads) {
-        if (R.bridge || R.st.minor || R.filler) continue;
+        if (R.st.minor || R.filler) continue;
+        if (R.bridge) { for (const poly of R.zonePolys) this.raster.fillPolygon([poly], RBIT.ROAD); continue; }
         const pp = prep(R.pts);
         const bit = R.st.base === 'service' ? RBIT.SERVICE : RBIT.ROAD;
         for (let i = 0; i < R.pts.length - 1; i++) {
@@ -596,7 +636,7 @@ export class RoadNetwork {
         pts = insertVertices(pts, prep(pts), R.xints.map((q) => q.s));
       }
       const pp = prep(pts);
-      this.ribbon(pts, pp, R.bridge ? R.hs : null, st, mints);
+      this.ribbon(pts, pp, R.bridge ? R.hs : null, st, mints, R.bridge ? R.dzone : null);
       if (R.bridge) this.deckStructure(R, pts, pp);
       else if (!R.filler) this.sidewalks(R, pts, pp);
       // hs: per-point height such that the drivable surface is hs + 0.05 (decks AND ground roads)
@@ -604,6 +644,9 @@ export class RoadNetwork {
       if (!R.bridge) {
         // ext: hw -> round end caps, so the outside wedge of a bend and the junction interior count as carriageway
         for (let i = 0; i < pts.length - 1; i++) this.segHash.add({ ax: pts[i][0], az: pts[i][1], bx: pts[i + 1][0], bz: pts[i + 1][1], ha: hs[i] + 0.05, hb: hs[i + 1] + 0.05, hw: st.hw, ext: st.hw, road: R });
+      } else {
+        // a ramp-foot zone is ground carriageway (asphalt lift, sidewalk cut), not deck: see footZones
+        for (let i = 0; i < pts.length - 1; i++) if (R.dzone[i] && R.dzone[i + 1]) this.segHash.add({ ax: pts[i][0], az: pts[i][1], bx: pts[i + 1][0], bz: pts[i + 1][1], ha: hs[i] + 0.05, hb: hs[i + 1] + 0.05, hw: st.hw, ext: 0.6, road: R, zone: true });
       }
       this.list.push({ pts, pp, st, ints, bridge: R.bridge, hs, hg: R.bridge ? R.hg : null, filler: R.filler, name: R.r.n });
       if (!R.filler) { this.minimap.push(pts.map((p) => [p[0], p[1]])); this.minimapClass.push(st.cls); }
@@ -612,7 +655,7 @@ export class RoadNetwork {
   }
 
   // ---------------------------------------------------------------- carriageway ribbon
-  ribbon(pts, pp, hs, st, ints) {
+  ribbon(pts, pp, hs, st, ints, zone = null) {
     const B = this.roadBuf, n = pts.length;
     const lanes = st.lanes, ow = st.oneway ? 1 : 0, mode = st.markings, hw = st.hw, pw = st.parkW;
     const yBase = 0.05;
@@ -629,13 +672,15 @@ export class RoadNetwork {
       const P0 = [a[0] - ma[0] * hw, a[1] - ma[1] * hw], P1 = [a[0] + ma[0] * hw, a[1] + ma[1] * hw];
       const P2 = [b[0] - mb[0] * hw, b[1] - mb[1] * hw], P3 = [b[0] + mb[0] * hw, b[1] + mb[1] * hw];
       // decks: flat cross-section at the solved deck height; ground roads: sampled from the ground
-      // surface (whose road corridors are flattened to the centre-line profile) so it never pokes through
-      const yv = (P, k) => (hs ? hs[k] : this.gh(P[0], P[1])) + yBase;
-      const nv = (P) => (hs ? null : this.gn(P[0], P[1]));
-      const v0 = B.v(P0[0], yv(P0, i), P0[1], -hw, s0, hw, pw, lanes, ow, mode, sp, rp, sn, rn, nv(P0));
-      const v1 = B.v(P1[0], yv(P1, i), P1[1], hw, s0, hw, pw, lanes, ow, mode, sp, rp, sn, rn, nv(P1));
-      const v2 = B.v(P2[0], yv(P2, i + 1), P2[1], -hw, s1, hw, pw, lanes, ow, mode, sp, rp, sn, rn, nv(P2));
-      const v3 = B.v(P3[0], yv(P3, i + 1), P3[1], hw, s1, hw, pw, lanes, ow, mode, sp, rp, sn, rn, nv(P3));
+      // surface (whose road corridors are flattened to the centre-line profile) so it never pokes through;
+      // a deck's ramp-foot zone (zone[k]) is ground too, ZONE_LIFT above the street it runs over
+      const flat = (k) => hs && !(zone && zone[k]);
+      const yv = (P, k) => (flat(k) ? hs[k] : this.gh(P[0], P[1]) + (hs ? ZONE_LIFT : 0)) + yBase;
+      const nv = (P, k) => (flat(k) ? null : this.gn(P[0], P[1]));
+      const v0 = B.v(P0[0], yv(P0, i), P0[1], -hw, s0, hw, pw, lanes, ow, mode, sp, rp, sn, rn, nv(P0, i));
+      const v1 = B.v(P1[0], yv(P1, i), P1[1], hw, s0, hw, pw, lanes, ow, mode, sp, rp, sn, rn, nv(P1, i));
+      const v2 = B.v(P2[0], yv(P2, i + 1), P2[1], -hw, s1, hw, pw, lanes, ow, mode, sp, rp, sn, rn, nv(P2, i + 1));
+      const v3 = B.v(P3[0], yv(P3, i + 1), P3[1], hw, s1, hw, pw, lanes, ow, mode, sp, rp, sn, rn, nv(P3, i + 1));
       upTri(B, v0, v2, v1); upTri(B, v1, v2, v3);
     }
   }
@@ -987,8 +1032,7 @@ export class RoadNetwork {
 
   // ---------------------------------------------------------------- bridges
   solveBridges(roads) {
-    const groundKeys = new Set();
-    for (const R of roads) if (!R.bridge && !R.st.minor) for (const p of R.pts) groundKeys.add(key(p));
+    const streets = this.footStreets; // ground carriageways (segHash is filled later, in the ribbon pass)
     const nodeIdx = new Map(), nodes = [];
     const nodeOf = (p) => {
       const k = key(p);
@@ -998,8 +1042,12 @@ export class RoadNetwork {
     };
     const B = roads.filter((R) => R.bridge);
     for (const R of B) {
-      const sd = subdivide(R.pts, 18, R.flags);
-      R.dpts = sd.pts; R.dflags = sd.flags;
+      // the deck is subdivided finely inside a ramp-foot zone (footZones), with a vertex exactly where the zone
+      // ends, so the climb starts at the carriageway edge
+      const sd = subdivideDeck(R.pts, R.flags, R.pp0, R.zone);
+      R.dpts = sd.pts; R.dflags = sd.flags; R.ds = sd.s;
+      const L = R.pp0.L;
+      R.dzone = R.ds.map((s) => (R.zone[0] > 0 && s <= R.zone[0] + 1e-6) || (R.zone[1] > 0 && s >= L - R.zone[1] - 1e-6));
       const motor = /^(motorway|trunk)/.test(R.st.cls);
       const ly = Math.max(1, R.r.ly || 1);
       const base = motor ? Math.max(8, 6.5 * ly) : 6 * ly;
@@ -1016,12 +1064,20 @@ export class RoadNetwork {
           nd.adj.push([R.dn[i - 1], L, 1]); nodes[R.dn[i - 1]].adj.push([R.dn[i], L, 1]); // [node, length, grade multiplier]
         }
       });
-      const g = R.r.g || [0, 0];
-      const e0 = nodes[R.dn[0]], e1 = nodes[R.dn[R.dn.length - 1]];
-      if (g[0] || groundKeys.has(key(R.dpts[0]))) e0.grounded = true;
-      if (g[1] || groundKeys.has(key(R.dpts[R.dpts.length - 1]))) e1.grounded = true;
+      if (R.gend[0]) nodes[R.dn[0]].grounded = true;
+      if (R.gend[1]) nodes[R.dn[R.dn.length - 1]].grounded = true;
     }
-    const grade = 0.06, MIN_CLEAR = 4.6; // m: minimum deck clearance over a crossed street
+    // ramp-foot zones: the deck is part of the street it runs over (grounded; ZONE_LIFT above the ground so the
+    // two ribbons do not z-fight). The feet themselves stay exactly on the ground, where the ground road continues.
+    for (const R of B) {
+      const n = R.dn.length;
+      for (let i = 0; i < n; i++) {
+        if (!R.dzone[i] || (i === 0 && R.gend[0]) || (i === n - 1 && R.gend[1])) continue;
+        const nd = nodes[R.dn[i]];
+        if (!nd.zone) { nd.zone = true; nd.grounded = true; nd.g += ZONE_LIFT; }
+      }
+    }
+    const grade = 0.06, MIN_CLEAR = 4.6, MIN_CLEAR_SERVICE = 3.6; // m: minimum deck clearance over a crossed street / service road
     const N = nodes.length;
     const relaxDown = (h, fixed) => { // min-plus: h[j] <= h[i] + grade * L
       const heap = new MinHeap();
@@ -1069,18 +1125,13 @@ export class RoadNetwork {
     // ---- clearance over the streets a deck crosses: a deck hanging 0.5-3 m over a carriageway is neither a
     // bridge nor a ramp foot (cars clipped through freeway ramps over 1st / 2nd / Harrison Street). Deck nodes get
     // a lower bound of street + MIN_CLEAR, propagated at the grade; samples within 30 m of the piece's own
-    // grounded end (the ramp merging into that street) and over the deck's own ground continuation are exempt.
+    // grounded end (the ramp merging into that street; measured from the end of its ramp-foot zone, which is part
+    // of the street) and over the deck's own ground continuation are exempt. A service road (parking aisle,
+    // driveway) only asks for MIN_CLEAR_SERVICE (a car passes under the slab).
     const clear = new Float64Array(N).fill(-Infinity);
-    const streets = new SegmentHash(32); // ground carriageways (segHash is filled later, in the ribbon pass)
-    for (const G of roads) {
-      if (G.bridge || G.st.minor || G.st.base === 'service') continue;
-      for (let i = 0; i + 1 < G.pts.length; i++) streets.add({ ax: G.pts[i][0], az: G.pts[i][1], bx: G.pts[i + 1][0], bz: G.pts[i + 1][1], hw: G.st.hw, ext: G.st.hw, road: G });
-    }
     for (const R of B) {
-      const nm = R.r.n || '', nd0 = R.dn[0], nd1 = R.dn[R.dn.length - 1];
-      const feet = [];
-      if (nodes[nd0].grounded) feet.push(R.dpts[0]);
-      if (nodes[nd1].grounded) feet.push(R.dpts[R.dpts.length - 1]);
+      const nm = R.r.n || '', Lp = R.pp0.L;
+      const exA = R.gend[0] ? R.zone[0] + 30 : -1, exB = R.gend[1] ? Lp - R.zone[1] - 30 : Lp + 1;
       for (let i = 0; i + 1 < R.dpts.length; i++) {
         const a = R.dpts[i], b = R.dpts[i + 1], L = Math.hypot(b[0] - a[0], b[1] - a[1]);
         if (L < 1e-6) continue;
@@ -1088,12 +1139,12 @@ export class RoadNetwork {
         for (const e of nodes[R.dn[i]].adj) if (e[0] === R.dn[i + 1]) gm = e[2] || 1;
         const n = Math.max(1, Math.ceil(L / 3));
         for (let k = 0; k <= n; k++) {
-          const t = k / n, x = a[0] + (b[0] - a[0]) * t, z = a[1] + (b[1] - a[1]) * t;
-          if (feet.some((f) => Math.hypot(x - f[0], z - f[1]) < 30)) continue;
-          let over = false;
-          streets.forEachNear(x, z, 0, (sg, tt, lat) => { if (Math.abs(lat) <= sg.hw && (sg.road.r.n || '') !== nm) over = true; });
+          const t = k / n, x = a[0] + (b[0] - a[0]) * t, z = a[1] + (b[1] - a[1]) * t, s = R.ds[i] + L * t;
+          if (s < exA || s > exB) continue;
+          let over = 0;
+          streets.forEachNear(x, z, 0, (sg, tt, lat) => { if (Math.abs(lat) <= sg.hw && (sg.road.r.n || '') !== nm) over = Math.max(over, sg.road.st.base === 'service' ? MIN_CLEAR_SERVICE : MIN_CLEAR); });
           if (!over) continue;
-          const need = this.gh(x, z) + 0.05 + MIN_CLEAR, da = L * t, db = L - da;
+          const need = this.gh(x, z) + 0.05 + over, da = L * t, db = L - da;
           if (need - grade * gm * da > clear[R.dn[i]]) clear[R.dn[i]] = need - grade * gm * da;
           if (need - grade * gm * db > clear[R.dn[i + 1]]) clear[R.dn[i + 1]] = need - grade * gm * db;
         }
@@ -1110,23 +1161,40 @@ export class RoadNetwork {
     // ---- grounded ends must meet the ground. The grade limit alone leaves a ramp foot in the air (or buried)
     // when a piece's other end is too far up / down for 6 % over its length (Harrison Street over the freeway cut
     // climbs 10 %: the deck started 2 m above the street, a cliff cars fell off). Such a piece gets the grade it
-    // needs, its grounded ends are pinned to the ground, and the envelopes are solved again.
+    // needs over its climb (the part between its grounded runs: foot + ramp-foot zone), its grounded runs are
+    // pinned to the ground, and the envelopes are solved again.
     let repin = false;
     const setMul = (a, b, mul) => {
       for (const e of nodes[a].adj) if (e[0] === b) e[2] = Math.max(e[2] || 1, mul);
       for (const e of nodes[b].adj) if (e[0] === a) e[2] = Math.max(e[2] || 1, mul);
     };
     for (const R of B) {
-      const ends = [R.dn[0], R.dn[R.dn.length - 1]];
-      let L = 0;
-      for (let i = 1; i < R.dpts.length; i++) L += Math.hypot(R.dpts[i][0] - R.dpts[i - 1][0], R.dpts[i][1] - R.dpts[i - 1][1]);
+      const n = R.dn.length, s = R.ds;
+      let a = 0; while (a < n && nodes[R.dn[a]].grounded) a++;           // nodes 0 .. a-1: grounded run at the start
+      let b = n - 1; while (b >= 0 && nodes[R.dn[b]].grounded) b--;     // nodes b+1 .. n-1: grounded run at the end
+      const whole = a > b;                                               // no climb: the piece lies on the ground
+      const sa = Math.max(0, a - 1), sb = Math.min(n - 1, b + 1);       // shoulders: the climb runs between them
+      const Lc = whole ? 0 : Math.max(1, s[sb] - s[sa]);
       for (let e = 0; e < 2; e++) {
-        const ni = ends[e], far = ends[1 - e];
-        if (ni === far || !nodes[ni].grounded || fixed[ni] || Math.abs(h[ni] - nodes[ni].g) < 0.25) continue;
-        const need = Math.abs(h[far] - nodes[ni].g) / Math.max(L, 1);
-        const mul = Math.max(1, (need / grade) * 1.02);
-        for (let i = 1; i < R.dn.length; i++) setMul(R.dn[i - 1], R.dn[i], mul);
-        fixed[ni] = 1; pin[ni] = nodes[ni].g; repin = true;
+        const run = e === 0 ? [0, a - 1] : [b + 1, n - 1];
+        if (run[0] > run[1]) continue;
+        let off = 0;
+        for (let i = run[0]; i <= run[1]; i++) if (!fixed[R.dn[i]]) off = Math.max(off, Math.abs(h[R.dn[i]] - nodes[R.dn[i]].g));
+        if (off < 0.25) continue;
+        if (!whole) {
+          // the grade the climb needs from this shoulder: to the far shoulder's height, and to every clearance
+          // bound along the climb (a bound the grade cannot reach from the pinned shoulder would be a cliff)
+          const sh = e === 0 ? sa : sb, ni = R.dn[sh], far = R.dn[e === 0 ? sb : sa], gsh = nodes[ni].g;
+          let need = Math.abs(h[far] - gsh) / Lc;
+          for (let j = sa + 1; j < sb; j++) {
+            const c = clear[R.dn[j]];
+            if (c > gsh) need = Math.max(need, (c - gsh) / Math.max(1, Math.abs(s[j] - s[sh])));
+          }
+          const mul = Math.max(1, (need / grade) * 1.02);
+          for (let i = sa + 1; i <= sb; i++) setMul(R.dn[i - 1], R.dn[i], mul);
+        }
+        for (let i = run[0]; i <= run[1]; i++) { const ni = R.dn[i]; if (!fixed[ni]) { fixed[ni] = 1; pin[ni] = nodes[ni].g; } }
+        repin = true;
       }
     }
     if (repin) {
@@ -1144,10 +1212,80 @@ export class RoadNetwork {
       R.dints = [];
       R.dflags.forEach((f, i) => { if (f) { const it = R.ints.find((q) => q.i !== undefined && R.pts[q.i] === R.dpts[i]); if (it) R.dints.push({ s: pp.s[i], r: it.r }); } });
       for (let i = 0; i < R.dpts.length - 1; i++) {
+        if (R.dzone[i] && R.dzone[i + 1]) continue; // a ramp-foot zone is street, not deck (segHash, in build())
         this.deckHash.add({ ax: R.dpts[i][0], az: R.dpts[i][1], bx: R.dpts[i + 1][0], bz: R.dpts[i + 1][1], ha: R.hs[i] + 0.05, hb: R.hs[i + 1] + 0.05, hw: R.st.hw - 0.1, ext: 0.6, road: R });
       }
     }
     this.bridgeCount = B.length;
+  }
+
+  /**
+   * Ramp-foot zone of a bridge piece at its grounded end `end` (0 = start, 1 = end): the arc length from that end
+   * over which the deck is part of the street it runs over. OSM ends a ramp's bridge way where the span ends, a
+   * few metres past (or inside) the street the ramp meets, and the approach beyond is a ground road here; so the
+   * deck used to climb at the grade from a foot inside / beside the carriageway, hanging 0.5-1.3 m over it for
+   * 20-30 m (cars drove through the slab). Walking from the foot in FOOT_STEP steps (at most FOOT_MAX m), the zone
+   * runs to the last sample whose centre line lies inside another road's ground carriageway (not a same-name road,
+   * not the deck's own continuation: a segment at the foot node leaving along the deck's direction): a street
+   * within FOOT_GAP m of the foot / the previous hit, a service road (driveway, parking aisle: crossed at grade
+   * like a ramp's own foot) within FOOT_GAP_SERVICE m. The deck is pinned to the ground inside the zone and starts
+   * its climb at the carriageway edge. Returns 0 when the foot is clear of every other carriageway.
+   */
+  footZones(roads) {
+    const groundKeys = new Set();
+    for (const R of roads) if (!R.bridge && !R.st.minor) for (const p of R.pts) groundKeys.add(key(p));
+    const streets = new SegmentHash(32);
+    for (const G of roads) {
+      if (G.bridge || G.st.minor) continue;
+      for (let i = 0; i + 1 < G.pts.length; i++) streets.add({ ax: G.pts[i][0], az: G.pts[i][1], bx: G.pts[i + 1][0], bz: G.pts[i + 1][1], hw: G.st.hw, ext: G.st.hw, road: G });
+    }
+    this.footStreets = streets;
+    this.footZoneCount = 0;
+    for (const R of roads) {
+      if (!R.bridge) continue;
+      const g = R.r.g || [0, 0], L = R.pp0.L;
+      R.gend = [!!(g[0] || groundKeys.has(key(R.pts[0]))), !!(g[1] || groundKeys.has(key(R.pts[R.pts.length - 1])))];
+      R.zone = [R.gend[0] ? this.footZone(R, streets, 0) : 0, R.gend[1] ? this.footZone(R, streets, 1) : 0];
+      // zone outlines for the raster (one quad per segment of the zone's part of the centre line)
+      R.zonePolys = [];
+      const spans = [];
+      if (R.zone[0] + R.zone[1] >= L - 1e-6) spans.push([0, L]);
+      else { if (R.zone[0] > 0) spans.push([0, R.zone[0]]); if (R.zone[1] > 0) spans.push([L - R.zone[1], L]); }
+      for (const [s0, s1] of spans) {
+        const sub = subPolyline(R.pts, R.pp0, s0, s1), pp = prep(sub), hw = R.st.hw;
+        for (let i = 0; i + 1 < sub.length; i++) {
+          const a = sub[i], b = sub[i + 1], ma = pp.m[i], mb = pp.m[i + 1];
+          R.zonePolys.push([[a[0] - ma[0] * hw, a[1] - ma[1] * hw], [b[0] - mb[0] * hw, b[1] - mb[1] * hw], [b[0] + mb[0] * hw, b[1] + mb[1] * hw], [a[0] + ma[0] * hw, a[1] + ma[1] * hw]]);
+        }
+        this.footZoneCount++;
+      }
+    }
+  }
+
+  footZone(R, streets, end) {
+    const pts = R.pts, pp = R.pp0, L = pp.L, nm = R.r.n || '';
+    const fp = end ? pts[pts.length - 1] : pts[0], fk = key(fp);
+    const d = end ? pp.d[pp.d.length - 1] : pp.d[0];
+    let last = -1;
+    for (let u = 0; u <= Math.min(L, FOOT_MAX) + 1e-9; u += FOOT_STEP) {
+      const gap = u - Math.max(last, 0);
+      if (gap > FOOT_GAP_SERVICE) break;
+      const [x, z] = samplePolyline(pts, pp, end ? L - u : u);
+      let over = false;
+      streets.forEachNear(x, z, 0, (sg, t, lat) => {
+        if (over || Math.abs(lat) > sg.hw) return;
+        const G = sg.road;
+        if (nm && (G.r.n || '') === nm) return;
+        if (gap > FOOT_GAP && G.st.base !== 'service') return;
+        if (key([sg.ax, sg.az]) === fk || key([sg.bx, sg.bz]) === fk) {
+          const l = Math.hypot(sg.bx - sg.ax, sg.bz - sg.az) || 1;
+          if (Math.abs(((sg.bx - sg.ax) * d[0] + (sg.bz - sg.az) * d[1]) / l) > 0.7) return;
+        }
+        over = true;
+      });
+      if (over) last = u;
+    }
+    return last < 0 ? 0 : Math.min(L, last + FOOT_STEP * 0.5);
   }
 
   /** One deckHolds rule (see DEFAULT_DECK_HOLD): returns Map(nodeIndex -> held deck height). */

@@ -88,7 +88,6 @@ noon, afternoon, golden (default), sunset, dusk, night, or hours as a number.
 - Engine extraction in progress: see `ENGINE.md` and `engine/`.
 
 ## Known limitations
-- Freeway / bus ramp feet at 1st, 2nd and Harrison Street overlap the street they merge into for their first ~30 m (OSM geometry); the ramp slab there is 0.5–1.3 m above the asphalt and the car drives through it.
 - Terrain is real (USGS elevation via AWS Terrarium tiles, `tools/bake-terrain.mjs`), but the Yerba Buena
   tunnel is not modelled: the bridge deck simply runs into the island's hill.
 - A parked player holds up the traffic behind it. Water reflects only the sky, not the city.

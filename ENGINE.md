@@ -482,7 +482,13 @@ a crest jump entered "flight mode" so the hover assist floated the car down.
 `tools/car-sim.mjs` grew 24 suspension checks (rest, ring-down, 12 cm kerb, rounded slope break, dive / squat / roll
 signs, ledge drop, arming, traffic shove, reset on a slope); 73 checks pass.
 
-**Known map artifact (not physics).** The feet of the freeway and Transbay bus ramps at 1st, 2nd and Harrison
-Street overlap the street they merge into for the first ~30 m of ramp; the deck there is 0.5-1.3 m above the asphalt
-(exempt from the clearance bound because it is the ramp's own foot). The car now drives through that slab instead
-of teleporting onto it; the fix is in the OSM geometry / a ramp-foot rule, not in the controller.
+**Known map artifact (fixed in the deck solver, 2026-10-19).** The feet of the freeway and Transbay bus ramps at 1st,
+2nd and Harrison Street overlapped the street they merge into for the first ~30 m of ramp (OSM ends the bridge way
+where the span ends, a few metres past the street; the approach beyond is a ground road here); the deck climbed at 6 %
+from that foot and hung 0.5-1.3 m over the asphalt, exempt from the clearance bound, and the car drove through the slab.
+`RoadNetwork.footZones` now walks from every grounded deck end and pins the deck to the ground while its centre line
+runs over another road's carriageway (a street within 15 m of the foot / the previous hit, a service road within 30 m):
+that ramp-foot zone is street, not deck (rasterised as road, in `segHash`, ribbon sampled from the ground 2 cm above the
+street's, no `deckHash` entry, no slab), and the climb starts at the carriageway edge with the grade it needs.
+`node dev/ramp-foot-probe.mjs` lists deck samples 0.4-3.2 m over a ground carriageway: 51 before (nine zones now,
+four pieces lie on the ground entirely), 0 after; drive-sim sunk-wheel steps 438 -> 0, everything else unchanged.

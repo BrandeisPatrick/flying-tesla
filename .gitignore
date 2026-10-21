@@ -16,3 +16,6 @@ tools/.osm-cache/
 # procedural textures when the files are missing
 public/textures/**/*.jpg
 public/textures/**/*.ktx2
+
+# per-user desktop tooling config
+.claude/
