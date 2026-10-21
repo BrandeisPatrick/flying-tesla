@@ -5,12 +5,12 @@ downtown San Francisco (Financial District, Embarcadero, Rincon Hill, Nob Hill, 
 built from OpenStreetMap data on real USGS terrain, with AI traffic that obeys the signals.
 Hold Space to lift off and fly between the towers or along the Bay Bridge cables.
 
-**Play it in the browser: https://brandeispatrick.github.io/flying-tesla/** (GitHub Pages; `npm run deploy` publishes
+**Play it in the browser: https://brandeispatrick.github.io/roadster/** (GitHub Pages; `npm run deploy` publishes
 a new build from a checkout that has the texture sets).
 
 ```bash
-git clone --recurse-submodules https://github.com/BrandeisPatrick/flying-tesla.git
-cd flying-tesla
+git clone --recurse-submodules https://github.com/BrandeisPatrick/roadster.git
+cd roadster
 npm install        # links the engine submodule as the workspace package @vibe/engine
 npm run dev        # http://localhost:5180
 ```

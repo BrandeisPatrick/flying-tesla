@@ -1,4 +1,4 @@
-// Publish the built game (dist/, built with `npm run build:pages`, base /flying-tesla/) to GitHub Pages: the
+// Publish the built game (dist/, built with `npm run build:pages`, base /roadster/) to GitHub Pages: the
 // contents of dist/ become a single orphan commit force-pushed to the `gh-pages` branch of this repository
 // (the site keeps no history, so the 110 MB of textures do not pile up). Pages must be set to serve the
 // gh-pages branch (Settings > Pages, or `gh api` below runs once). Run: npm run deploy

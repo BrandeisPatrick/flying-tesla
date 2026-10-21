@@ -1,5 +1,5 @@
 {
-  "name": "flying-tesla",
+  "name": "roadster",
   "version": "1.0.0",
   "description": "Roadster: a browser driving / flying game over real downtown San Francisco (Three.js), on the inbrowser-game-engine (@vibe/engine)",
   "main": "src/main.js",
@@ -14,8 +14,8 @@
     "textures:compress": "node tools/compress-textures.mjs",
     "textures:basis": "node tools/compress-textures.mjs --basis-only",
     "test": "node engine/test/car-sim.mjs && node dev/traffic-sim.mjs 30 250",
-    "build:pages": "BASE_PATH=/flying-tesla/ vite build",
-    "preview:pages": "BASE_PATH=/flying-tesla/ vite preview --port 5181",
+    "build:pages": "BASE_PATH=/roadster/ vite build",
+    "preview:pages": "BASE_PATH=/roadster/ vite preview --port 5181",
     "deploy": "npm run build:pages && node tools/deploy-pages.mjs"
   },
   "keywords": [],
@@ -36,7 +36,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BrandeisPatrick/flying-tesla.git"
+    "url": "git+https://github.com/BrandeisPatrick/roadster.git"
   },
-  "homepage": "https://brandeispatrick.github.io/flying-tesla/"
+  "homepage": "https://brandeispatrick.github.io/roadster/"
 }

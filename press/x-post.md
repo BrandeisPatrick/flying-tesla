@@ -1,10 +1,10 @@
-# X post draft (Roadster / flying-tesla)
+# X post draft (Roadster)
 
 Main post (about 260 characters; X counts the link as 23):
 
 > I built a flying-car game that runs in your browser 🚗✈️
 > Real downtown San Francisco (OpenStreetMap streets, USGS terrain), 250 AI cars that obey the lights, cold-gas thrusters: hold Space and lift off between the towers.
-> Play it: https://brandeispatrick.github.io/flying-tesla/
+> Play it: https://brandeispatrick.github.io/roadster/
 
 Attach `press/aerial.jpg` (or a 10–20 s screen recording: pull away from the Beale & Mission light, hold Space,
 climb through the towers toward the Bay Bridge, then land on a roof).
