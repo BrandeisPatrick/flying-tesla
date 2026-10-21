@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roadster — Flying Car</title>
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #000; font-family: -apple-system, system-ui, sans-serif; }
+    #app { position: fixed; inset: 0; }
+    canvas { display: block; }
+    #loading { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #ddd; background: #06080c; z-index: 100; }
+    #loading .bar { width: 320px; height: 4px; background: #222; margin-top: 16px; border-radius: 2px; overflow: hidden; }
+    #loading .bar > div { height: 100%; width: 0%; background: #e82127; transition: width .2s; }
+    #loading small { opacity: .6; margin-top: 10px; }
+  </style>
+  <script type="module" crossorigin src="/roadster/assets/main-DTRCGC2s.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="loading">
+    <h2 style="margin:0;font-weight:500;letter-spacing:.2em">ROADSTER</h2>
+    <div class="bar"><div id="loading-bar"></div></div>
+    <small id="loading-text">Loading city…</small>
+  </div>
+</body>
+</html>

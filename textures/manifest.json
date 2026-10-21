@@ -1,0 +1,1550 @@
+{
+ "source": "Poly Haven (polyhaven.com), CC0 1.0",
+ "resolution": "1k",
+ "sets": {
+  "brick_red": {
+   "role": "brick_red",
+   "id": "red_bricks_04",
+   "name": "Red Bricks 04",
+   "size": [
+    2.5,
+    2.5
+   ],
+   "authors": [
+    "Rob Tuytel"
+   ],
+   "maps": {
+    "Diffuse": "diff.jpg",
+    "nor_gl": "nor_gl.jpg",
+    "Rough": "rough.jpg",
+    "AO": "ao.jpg"
+   },
+   "ktx2Maps": {
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 223463,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 283965,
+     "psnr": 31.51,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    },
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1306380,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 339216,
+     "psnr": 36.36,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    },
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 184186,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 234867,
+     "psnr": 34.67,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 192281,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 327707,
+     "psnr": 30.09,
+     "params": "etc1s q160 e2 linear mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "brick_painted": {
+   "role": "brick_painted",
+   "id": "whitewashed_brick",
+   "name": "Whitewashed Brick",
+   "size": [
+    2,
+    2
+   ],
+   "authors": [
+    "Charlotte Baglioni"
+   ],
+   "maps": {
+    "Diffuse": "diff.jpg",
+    "Rough": "rough.jpg",
+    "AO": "ao.jpg",
+    "nor_gl": "nor_gl.jpg"
+   },
+   "ktx2Maps": {
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 200563,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 844123,
+     "psnr": 33.05,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    },
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 34158,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 206042,
+     "psnr": 50.64,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 183753,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 654967,
+     "psnr": 34.69,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1244303,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 946861,
+     "psnr": 38.43,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "brick_dark": {
+   "role": "brick_dark",
+   "id": "brick_wall_08",
+   "name": "Brick Wall 08",
+   "size": [
+    1.9,
+    1.9
+   ],
+   "authors": [
+    "Amal Kumar"
+   ],
+   "maps": {
+    "Rough": "rough.jpg",
+    "nor_gl": "nor_gl.jpg",
+    "Diffuse": "diff.jpg",
+    "AO": "ao.jpg"
+   },
+   "ktx2Maps": {
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 153835,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 477096,
+     "psnr": 42.03,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1283951,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 1068884,
+     "psnr": 34.4,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    },
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 189396,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 722173,
+     "psnr": 34.94,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    },
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 176878,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 744002,
+     "psnr": 30.17,
+     "params": "etc1s q160 e2 linear mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "concrete_panel": {
+   "role": "concrete_panel",
+   "id": "concrete_wall_004",
+   "name": "Concrete Wall 004",
+   "size": [
+    2,
+    2
+   ],
+   "authors": [
+    "Dario Barresi",
+    "Charlotte Baglioni"
+   ],
+   "maps": {
+    "Rough": "rough.jpg",
+    "nor_gl": "nor_gl.jpg",
+    "AO": "ao.jpg",
+    "Diffuse": "diff.jpg"
+   },
+   "ktx2Maps": {
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 14524,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 233170,
+     "psnr": 50.12,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1276600,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 993350,
+     "psnr": 38.44,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    },
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 191143,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 903053,
+     "psnr": 29.07,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 168000,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 531968,
+     "psnr": 37.08,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "concrete_rough": {
+   "role": "concrete_rough",
+   "id": "concrete_wall_008",
+   "name": "Concrete Wall 008",
+   "size": [
+    2.71,
+    2.71
+   ],
+   "authors": [
+    "Dario Barresi",
+    "Charlotte Baglioni"
+   ],
+   "maps": {
+    "Rough": "rough.jpg",
+    "AO": "ao.jpg",
+    "nor_gl": "nor_gl.jpg",
+    "Diffuse": "diff.jpg"
+   },
+   "ktx2Maps": {
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 83544,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 322313,
+     "psnr": 47.73,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 167691,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 742397,
+     "psnr": 37.1,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 790297,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 511519,
+     "psnr": 48.55,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    },
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 169341,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 623051,
+     "psnr": 37.55,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "stucco_a": {
+   "role": "stucco_a",
+   "id": "beige_wall_002",
+   "name": "Beige Wall 002",
+   "size": [
+    3,
+    3
+   ],
+   "authors": [
+    "Dimitrios Savva",
+    "Rico Cilliers"
+   ],
+   "maps": {
+    "Rough": "rough.jpg",
+    "nor_gl": "nor_gl.jpg",
+    "AO": "ao.jpg",
+    "Diffuse": "diff.jpg"
+   },
+   "ktx2Maps": {
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 41364,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 256,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 30841,
+     "psnr": 43.58,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 324411,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 256,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 71919,
+     "psnr": 39.44,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    },
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 53211,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 256,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 50406,
+     "psnr": 38.85,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 46264,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 256,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 33581,
+     "psnr": 40.29,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "stucco_b": {
+   "role": "stucco_b",
+   "id": "white_stucco",
+   "name": "White Stucco",
+   "size": [
+    1.998,
+    1.998
+   ],
+   "authors": [
+    "Amal Kumar"
+   ],
+   "maps": {
+    "Rough": "rough.jpg",
+    "nor_gl": "nor_gl.jpg",
+    "Diffuse": "diff.jpg",
+    "AO": "ao.jpg"
+   },
+   "ktx2Maps": {
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 75480,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 347861,
+     "psnr": 46.49,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1237092,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 932038,
+     "psnr": 40.1,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    },
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 160794,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 557550,
+     "psnr": 37.72,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    },
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 154700,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 477195,
+     "psnr": 42.36,
+     "params": "etc1s q160 e2 linear mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "granite": {
+   "role": "granite",
+   "id": "granite_tile_03",
+   "name": "Granite Tile 03",
+   "size": [
+    1.802,
+    1.802
+   ],
+   "authors": [
+    "Charlotte Baglioni"
+   ],
+   "maps": {
+    "nor_gl": "nor_gl.jpg",
+    "Diffuse": "diff.jpg",
+    "Rough": "rough.jpg",
+    "AO": "ao.jpg"
+   },
+   "ktx2Maps": {
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1174086,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 778769,
+     "psnr": 44,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    },
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 200492,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 1056664,
+     "psnr": 29.52,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    },
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 100036,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 375664,
+     "psnr": 46.3,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 158942,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 514635,
+     "psnr": 40.54,
+     "params": "etc1s q160 e2 linear mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "wood_siding": {
+   "role": "wood_siding",
+   "id": "brown_planks_05",
+   "name": "Brown Planks 05",
+   "size": [
+    1,
+    1
+   ],
+   "authors": [
+    "Rob Tuytel"
+   ],
+   "maps": {
+    "Rough": "rough.jpg",
+    "Diffuse": "diff.jpg",
+    "nor_gl": "nor_gl.jpg",
+    "AO": "ao.jpg"
+   },
+   "ktx2Maps": {
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 43912,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 92792,
+     "psnr": 49.05,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 167676,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 298909,
+     "psnr": 38.15,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    },
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1220124,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 467650,
+     "psnr": 42.63,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    },
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 178112,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 418121,
+     "psnr": 34.47,
+     "params": "etc1s q160 e2 linear mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "metal_corrugated": {
+   "role": "metal_corrugated",
+   "id": "corrugated_iron",
+   "name": "Corrugated Iron",
+   "size": [
+    1.12,
+    1.12
+   ],
+   "authors": [
+    "Jenelle van Heerden",
+    "Dimitrios Savva"
+   ],
+   "maps": {
+    "AO": "ao.jpg",
+    "nor_gl": "nor_gl.jpg",
+    "Diffuse": "diff.jpg",
+    "Rough": "rough.jpg"
+   },
+   "ktx2Maps": {
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 71111,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 226032,
+     "psnr": 48.27,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1231942,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 755185,
+     "psnr": 43.72,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    },
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 184966,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 719557,
+     "psnr": 35.51,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    },
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 154170,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 455677,
+     "psnr": 42.73,
+     "params": "etc1s q160 e2 linear mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "roof_slate": {
+   "role": "roof_slate",
+   "id": "roof_slates_02",
+   "name": "Roof Slates 02",
+   "size": [
+    3,
+    3
+   ],
+   "authors": [
+    "Rob Tuytel"
+   ],
+   "maps": {
+    "Diffuse": "diff.jpg",
+    "Rough": "rough.jpg",
+    "nor_gl": "nor_gl.jpg",
+    "AO": "ao.jpg"
+   },
+   "ktx2Maps": {
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 213549,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 515626,
+     "psnr": 32.56,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    },
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 175272,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 307076,
+     "psnr": 39.09,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1349005,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 763206,
+     "psnr": 37.33,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    },
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 195515,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 445624,
+     "psnr": 31.36,
+     "params": "etc1s q160 e2 linear mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "roof_tar": {
+   "role": "roof_tar",
+   "id": "bitumen",
+   "name": "Bitumen",
+   "size": [
+    20,
+    20
+   ],
+   "authors": [
+    "Rob Tuytel"
+   ],
+   "maps": {
+    "AO": "ao.jpg",
+    "Diffuse": "diff.jpg",
+    "Rough": "rough.jpg",
+    "nor_gl": "nor_gl.jpg"
+   },
+   "ktx2Maps": {
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 56657,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 202581,
+     "psnr": 50.97,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 140738,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 451335,
+     "psnr": 39.53,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    },
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 59417,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 272094,
+     "psnr": 48.19,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1174559,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 691370,
+     "psnr": 45.48,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "asphalt_a": {
+   "role": "asphalt_a",
+   "id": "asphalt_02",
+   "name": "Asphalt 02",
+   "size": [
+    3,
+    3
+   ],
+   "authors": [
+    "Rob Tuytel"
+   ],
+   "maps": {
+    "Rough": "rough.jpg",
+    "Diffuse": "diff.jpg",
+    "AO": "ao.jpg",
+    "nor_gl": "nor_gl.jpg"
+   },
+   "ktx2Maps": {
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 189536,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 544032,
+     "psnr": 30.93,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 200719,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 731707,
+     "psnr": 26.69,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    },
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 191294,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 533336,
+     "psnr": 30.83,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1328670,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 1240122,
+     "psnr": 33.39,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "asphalt_b": {
+   "role": "asphalt_b",
+   "id": "clean_asphalt",
+   "name": "Clean Asphalt",
+   "size": [
+    2.1,
+    2.1
+   ],
+   "authors": [
+    "Dimitrios Savva"
+   ],
+   "maps": {
+    "AO": "ao.jpg",
+    "nor_gl": "nor_gl.jpg",
+    "Rough": "rough.jpg",
+    "Diffuse": "diff.jpg"
+   },
+   "ktx2Maps": {
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 174613,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 696236,
+     "psnr": 34.77,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1194308,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 776360,
+     "psnr": 43.66,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    },
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 164278,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 641634,
+     "psnr": 36.36,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 167633,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 697630,
+     "psnr": 35.87,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "sidewalk": {
+   "role": "sidewalk",
+   "id": "concrete_pavement",
+   "name": "Concrete Pavement",
+   "size": [
+    1.8,
+    1.8
+   ],
+   "authors": [
+    "Charlotte Baglioni"
+   ],
+   "maps": {
+    "nor_gl": "nor_gl.jpg",
+    "Diffuse": "diff.jpg",
+    "AO": "ao.jpg",
+    "Rough": "rough.jpg"
+   },
+   "ktx2Maps": {
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1302168,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 1184345,
+     "psnr": 35.39,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    },
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 195200,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 926197,
+     "psnr": 32.01,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    },
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 184684,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 866967,
+     "psnr": 29.81,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 136435,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 475799,
+     "psnr": 42.82,
+     "params": "etc1s q160 e2 linear mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "grass": {
+   "role": "grass",
+   "id": "leafy_grass",
+   "name": "Leafy Grass",
+   "size": [
+    2,
+    2
+   ],
+   "authors": [
+    "Charlotte Baglioni"
+   ],
+   "maps": {
+    "nor_gl": "nor_gl.jpg",
+    "Diffuse": "diff.jpg",
+    "Rough": "rough.jpg",
+    "AO": "ao.jpg"
+   },
+   "ktx2Maps": {
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1350298,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 1466049,
+     "psnr": 30.7,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    },
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 238247,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 1195394,
+     "psnr": 27.11,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    },
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 153213,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 511385,
+     "psnr": 40.95,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 198533,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 1056302,
+     "psnr": 25.52,
+     "params": "etc1s q160 e2 linear mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "dirt": {
+   "role": "dirt",
+   "id": "brown_mud_dry",
+   "name": "Brown Mud Dry",
+   "size": [
+    1.3,
+    1.3
+   ],
+   "authors": [
+    "Rob Tuytel"
+   ],
+   "maps": {
+    "Diffuse": "diff.jpg",
+    "nor_gl": "nor_gl.jpg",
+    "Rough": "rough.jpg",
+    "AO": "ao.jpg"
+   },
+   "ktx2Maps": {
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 219895,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 920456,
+     "psnr": 25.31,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    },
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1361598,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 1539092,
+     "psnr": 28.82,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    },
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 180949,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 390385,
+     "psnr": 36.49,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 204802,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 568420,
+     "psnr": 29.11,
+     "params": "etc1s q160 e2 linear mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "rock": {
+   "role": "rock",
+   "id": "rock_boulder_dry",
+   "name": "Rock Boulder Dry",
+   "size": [
+    1.8,
+    1.8
+   ],
+   "authors": [
+    "Dimitrios Savva",
+    "Rico Cilliers"
+   ],
+   "maps": {
+    "Rough": "rough.jpg",
+    "AO": "ao.jpg",
+    "Diffuse": "diff.jpg",
+    "nor_gl": "nor_gl.jpg"
+   },
+   "ktx2Maps": {
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 182375,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 668127,
+     "psnr": 35.9,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 164550,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 532861,
+     "psnr": 39.92,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 210298,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 859211,
+     "psnr": 32.69,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    },
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1274874,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 802497,
+     "psnr": 42.99,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "dry_grass": {
+   "role": "dry_grass",
+   "id": "withered_grass",
+   "name": "Withered Grass",
+   "size": [
+    2,
+    2
+   ],
+   "authors": [
+    "Charlotte Baglioni"
+   ],
+   "maps": {
+    "Rough": "rough.jpg",
+    "Diffuse": "diff.jpg",
+    "nor_gl": "nor_gl.jpg",
+    "AO": "ao.jpg"
+   },
+   "ktx2Maps": {
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 182246,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 824502,
+     "psnr": 31.08,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 203749,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 1138384,
+     "psnr": 27.11,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    },
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1351025,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 1472149,
+     "psnr": 30.46,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    },
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 191167,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 995037,
+     "psnr": 26.92,
+     "params": "etc1s q160 e2 linear mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "grass_aerial": {
+   "role": "grass_aerial",
+   "id": "aerial_grass_rock",
+   "name": "Aerial Grass Rock",
+   "size": [
+    15,
+    15
+   ],
+   "authors": [
+    "Rob Tuytel"
+   ],
+   "maps": {
+    "Diffuse": "diff.jpg",
+    "Rough": "rough.jpg",
+    "AO": "ao.jpg",
+    "nor_gl": "nor_gl.jpg"
+   },
+   "ktx2Maps": {
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 216381,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 666655,
+     "psnr": 30.78,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    },
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 173959,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 362214,
+     "psnr": 37.47,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 194440,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 506528,
+     "psnr": 31.88,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1342149,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 904956,
+     "psnr": 37.14,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    }
+   },
+   "ktx2": true
+  },
+  "terrain_aerial": {
+   "role": "terrain_aerial",
+   "id": "rocky_terrain_02",
+   "name": "Rocky Terrain 02",
+   "size": [
+    90,
+    90
+   ],
+   "authors": [
+    "Amal Kumar"
+   ],
+   "maps": {
+    "Rough": "rough.jpg",
+    "Diffuse": "diff.jpg",
+    "nor_gl": "nor_gl.jpg",
+    "AO": "ao.jpg"
+   },
+   "ktx2Maps": {
+    "Rough": {
+     "file": "rough.ktx2",
+     "bytes": 146303,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "rough.jpg",
+     "srcBytes": 437094,
+     "psnr": 43.15,
+     "params": "etc1s q160 e2 linear mips yflip"
+    },
+    "Diffuse": {
+     "file": "diff.ktx2",
+     "bytes": 196251,
+     "codec": "etc1s",
+     "srgb": true,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "diff.jpg",
+     "srcBytes": 843188,
+     "psnr": 33.6,
+     "params": "etc1s q160 e2 srgb mips yflip"
+    },
+    "nor_gl": {
+     "file": "nor_gl.ktx2",
+     "bytes": 1311542,
+     "codec": "uastc",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "nor_gl.jpg",
+     "srcBytes": 993692,
+     "psnr": 38.15,
+     "params": "uastc l2 zstd linear normal mips yflip"
+    },
+    "AO": {
+     "file": "ao.ktx2",
+     "bytes": 140705,
+     "codec": "etc1s",
+     "srgb": false,
+     "width": 1024,
+     "height": 1024,
+     "levels": 11,
+     "src": "ao.jpg",
+     "srcBytes": 442891,
+     "psnr": 42.1,
+     "params": "etc1s q160 e2 linear mips yflip"
+    }
+   },
+   "ktx2": true
+  }
+ },
+ "ktx2": {
+  "tool": "engine/tools/compress-textures.mjs",
+  "encoder": "Basis Universal (ktx2-encoder WASM)",
+  "orientation": "ru",
+  "transcoder": "basis/"
+ }
+}
