@@ -6,9 +6,15 @@ built from OpenStreetMap data on real USGS terrain, with AI traffic that obeys t
 Hold Space to lift off and fly between the towers or along the Bay Bridge cables.
 
 ```bash
-npm install
+git clone --recurse-submodules https://github.com/BrandeisPatrick/flying-tesla.git
+cd flying-tesla
+npm install        # links the engine submodule as the workspace package @vibe/engine
 npm run dev        # http://localhost:5180
 ```
+
+The engine lives in its own repository, [inbrowser-game-engine](https://github.com/BrandeisPatrick/inbrowser-game-engine),
+embedded here as the `engine/` submodule (an existing clone gets it with `git submodule update --init`). To pick up
+a newer engine commit: `git submodule update --remote engine`, then commit the new pointer.
 
 ## Controls
 | Key | Action |
@@ -41,7 +47,7 @@ Gamepad: left stick steer/pitch, RT throttle, LT brake, A thrust, B boost, Y cam
   `node tools/fetch-textures.mjs` (optional: the game falls back to procedural textures without them). Each JPG has a
   GPU-compressed `.ktx2` twin (Basis Universal) made by `npm run textures:compress` (`tools/compress-textures.mjs`;
   `public/basis/` holds the matching transcoder). The loader prefers the `.ktx2` and falls back to the JPG; `?ktx2=0`
-  in the URL forces the JPGs (A/B comparisons). Details and measurements: ENGINE.md, "Textures".
+  in the URL forces the JPGs (A/B comparisons). Details and measurements: engine/ENGINE.md, "Textures".
 - `src/car/` — procedural car mesh and effects on the engine's `VehicleController` (sprung body, tyre model, thruster flight; `Physics.js` is a re-export shim), `Input.js`.
 - `src/camera/`, `src/ui/`, `src/audio/` — chase camera, HUD overlay, Web Audio synth.
 - `tools/bake-map.mjs` — re-bake `public/map/city.json` from Overpass (`npm run bake:map`, `--refresh` to ignore cache).
@@ -49,7 +55,7 @@ Gamepad: left stick steer/pitch, RT throttle, LT brake, A thrust, B boost, Y cam
 - `tools/bake-farland.mjs`, `tools/fetch-textures.mjs` (+ `tools/textures.sf.json`, `--ktx2` to compress afterwards),
   `tools/compress-textures.mjs` (KTX2 twins + transcoder copy) — far relief / texture sets. All of them
   are thin SF wrappers over the parameterised engine bakers in `engine/tools/` (`--dry-run` prints the plan, `--help`).
-- `tools/car-sim.mjs` — headless physics checks (`node tools/car-sim.mjs`).
+- `engine/test/car-sim.mjs` — headless vehicle physics checks (`npm test` runs them with the traffic check).
 - `dev/traffic-sim.mjs` — headless traffic checks on the simulation core (`PLAYER=1 node dev/traffic-sim.mjs 120`).
 - `dev/drive-sim.mjs` — headless street drive: a pilot drives the Roadster along 23 real downtown streets with terrain, decks and colliders, and reports pitch/roll snaps, hops, grounded flicker, flight entries and impacts (`node dev/drive-sim.mjs --events`).
 - `dev/world.html`, `dev/car.html`, `dev/hud.html`, `dev/traffic.html` — isolated module test pages (world: streaming
@@ -85,7 +91,7 @@ noon, afternoon, golden (default), sunset, dusk, night, or hours as a number.
 - Hero car (`src/car/CarMesh.js` + `carBody.js`, `carParts.js`, `carMaterials.js`, `Effects.js`): ~58k tris,
   see-through canopy with interior, clearcoat flake paint, plumes, dust, skid marks, sparks, headlight cones.
 - Camera avoids buildings, vehicles, tree crowns and terrain (`src/camera/ChaseCamera.js`).
-- Engine extraction in progress: see `ENGINE.md` and `engine/`.
+- The engine is the git submodule `engine/` ([inbrowser-game-engine](https://github.com/BrandeisPatrick/inbrowser-game-engine)); its design notes are `engine/ENGINE.md`.
 
 ## Known limitations
 - Terrain is real (USGS elevation via AWS Terrarium tiles, `tools/bake-terrain.mjs`), but the Yerba Buena
@@ -93,7 +99,7 @@ noon, afternoon, golden (default), sunset, dusk, night, or hours as a number.
 - A parked player holds up the traffic behind it. Water reflects only the sky, not the city.
 - Bay Bridge east span past Yerba Buena is a plain deck; `dev/traffic.html` shows the lane graph (key L).
 - Street-lamp point lights only near the camera at night.
-- Buildings stream in tiles around the camera (ENGINE.md, "Streaming"): from street level a district tile appears
+- Buildings stream in tiles around the camera (engine/ENGINE.md, "Streaming"): from street level a district tile appears
   ~0.9-1.8 km away (farther for tiles with tall towers, from the air or over the water), the near-detail facades
   (real window openings) ~0.45 km before their LOD switch. Driving or flying fast towards the edge of the loaded area
   shows tiles arriving at that distance; a reset to the spawn after a long drive rebuilds the spawn area at once (a

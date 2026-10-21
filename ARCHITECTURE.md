@@ -119,7 +119,7 @@ Gamepad: left stick steer/pitch, RT throttle, LT brake, A thrust, B boost, Y cam
 
 ---
 **2026-10-18 update.** The module layout above describes the original game. The systems have since been
-extracted into the browser game engine in `engine/` (see `ENGINE.md`): the game is now `src/main.js` (wiring),
+extracted into the browser game engine in `engine/` (a git submodule of [inbrowser-game-engine](https://github.com/BrandeisPatrick/inbrowser-game-engine); see `engine/ENGINE.md`): the game is now `src/main.js` (wiring),
 `src/world/World.js` (San Francisco `MapWorld` configuration) plus the `bridge.js` / `landmarks.js` plugins,
 `src/car/` (hero car visuals over the engine `VehicleController`), and thin skins for HUD, camera, input and
-audio. A second game, `samples/canyon-run/`, runs on the same engine.
+audio. A second game, Canyon Run (`engine/samples/canyon-run/` in the engine repository), runs on the same engine.

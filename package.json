@@ -1,7 +1,7 @@
 {
-  "name": "flying-car",
+  "name": "flying-tesla",
   "version": "1.0.0",
-  "description": "Browser flying-car driving game (Three.js)",
+  "description": "Roadster: a browser driving / flying game over real downtown San Francisco (Three.js), on the inbrowser-game-engine (@vibe/engine)",
   "main": "src/main.js",
   "scripts": {
     "dev": "vite --port 5180",
@@ -13,7 +13,7 @@
     "textures:fetch": "node tools/fetch-textures.mjs",
     "textures:compress": "node tools/compress-textures.mjs",
     "textures:basis": "node tools/compress-textures.mjs --basis-only",
-    "test": "node tools/car-sim.mjs && node dev/traffic-sim.mjs 30 250"
+    "test": "node engine/test/car-sim.mjs && node dev/traffic-sim.mjs 30 250"
   },
   "keywords": [],
   "author": "",
@@ -30,5 +30,9 @@
   },
   "workspaces": [
     "engine"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrandeisPatrick/flying-tesla.git"
+  }
 }
