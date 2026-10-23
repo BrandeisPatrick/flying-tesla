@@ -15,8 +15,8 @@ Thread, one reply each:
    with the real street names, species-based trees, the Bay Bridge towers and cables. Materials are CC0 scans from
    Poly Haven. (attach `press/street.jpg`)
 2. The physics is plain JavaScript: a sprung body with per-wheel suspension (it dives, squats and leans), tyre slip,
-   and thruster flight with hover assist. 120 Hz fixed step, deterministic, tested headless along 21 km of real
-   streets before it ever ran in a browser.
+   and thruster flight with hover assist. 120 Hz fixed step, deterministic; a robot pilot drives it headless along 21 km
+   of real streets to catch every bump and snap.
 3. It runs on a browser game engine I'm building alongside it (Three.js / WebGL2, no install, no download): fixed-step
    core, physics, atmosphere and post-processing, OpenStreetMap city worlds, traffic AI in a Worker.
    [link to github.com/BrandeisPatrick/inbrowser-game-engine once it is public]
